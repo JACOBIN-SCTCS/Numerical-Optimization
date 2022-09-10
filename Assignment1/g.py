@@ -36,7 +36,7 @@ def rosenbrock_hessian(point):
     x = point[0]
     y = point[1]
     hessian = np.zeros((2,2))
-    hessian[0][0] = 2*b*y - 2*b*x*x
+    hessian[0][0] = 2.0 - 4*b*y + 12*b*x*x
     hessian[0][1] = -4*b*x
     hessian[1][0] = -4*b*x
     hessian[1][1] = 2*b 
@@ -102,7 +102,7 @@ def steepest_descent_rosenbrock(point):
         iterates.append(current_point)
         function_values.append(np.float64(fun(new_point.squeeze()).squeeze()))
 
-        if np.linalg.norm(current_point-previous_point) < 0.00001:
+        if np.linalg.norm(current_point-previous_point) < 0.001:
             break
     return iterations,iterates, function_values, step_sizes
     
@@ -163,7 +163,7 @@ def newton_rosenbrock(point):
         function_values.append(np.float64(fun(new_point.squeeze()).squeeze()))
         iterates.append(current_point)
         
-        if np.linalg.norm(current_point-previous_point) < 0.00001:
+        if np.linalg.norm(current_point-previous_point) < 0.0000001:
             break
     
     return iterations,iterates,function_values,step_sizes
@@ -183,6 +183,7 @@ ax.contour3D(X,Y,Z,50)
 print(rosenbrock(np.array([[-1.2],[0.0]])))
 iterations, iterates, function_values , step_sizes= newton_rosenbrock(np.array([[-1.2],[0.0]]))
 iterates = np.array(iterates)
+print(iterates)
 function_values = np.array(function_values)
-ax.plot3D(iterates[:,0,0],iterates[:,1,0],function_values[:])
-plt.show()
+#ax.plot3D(iterates[:,0,0],iterates[:,1,0],function_values[:])
+#plt.show()
